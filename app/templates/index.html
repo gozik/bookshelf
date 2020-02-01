@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block page_content %}
+{% if current_user.is_authenticated %}
+<div>
+	<p>Пользователь: <b>{{ current_user.username }}</b></p>
+    <p>Добро пожаловать на книжную полку.</p>
+</div>
+{% else %}
+<div>
+	<h1>Пожалуйста, залогиньтесь!</h1>
+</div>
+{% endif %}
+{% endblock %}

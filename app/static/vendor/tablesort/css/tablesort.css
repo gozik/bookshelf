@@ -1,0 +1,13 @@
+th.asc::after{
+    content: '\2191';
+    position: absolute;
+	padding-left: 6px;
+}
+th.desc::after{
+    content: '\2193';
+    position: absolute;
+	padding-left: 6px;
+}
+th.asc,th.desc {
+	cursor: pointer;
+}
