@@ -54,10 +54,10 @@ class Author(db.Model):
     __tablename__ = 'authors'
 
     id = db.Column(db.Integer, primary_key=True)
-    fullname = db.String(db.String(240))
+    fullname = db.Column(db.String(240))
 
-    def __str__(selfself):
-        return self.name
+    def __str__(self):
+        return self.fullname
 
 
 class Identifier(db.Model):
