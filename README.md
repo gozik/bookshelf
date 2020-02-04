@@ -5,7 +5,7 @@ Web application for book sharing
 Make virtualenv: virtualenv env
 Activate it: . env/scripts/activate
 Install requirements: pip install -r requirements.txt
-Set env var: export FLASK_APP=bookshelf.py
+Set env var: export FLASK_APP=booktoshare.py
 Optional for debug mode: export FLASK_ENV=development
 Init database: flask db init
 Migrations: flask db migrate
