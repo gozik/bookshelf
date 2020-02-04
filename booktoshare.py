@@ -14,7 +14,7 @@ def register(app):
         pass # TODO
 
 
-app = create_app()
+app = create_app(host='0.0.0.0')
 register(app)
 
 
