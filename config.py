@@ -9,6 +9,7 @@ class Config:
     SQLALCHEMY_RECORD_QUERIES = True
     APPLICATIONS_PER_PAGE = 20
     BOOTSTRAP_SERVE_LOCAL = True
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
     # FLASK_ADMIN_SWATCH = 'cerulean'
 
     @staticmethod
