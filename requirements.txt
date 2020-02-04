@@ -5,3 +5,5 @@ flask-bootstrap
 flask-login
 flask-admin
 flask-wtf
+psycopg2
+
