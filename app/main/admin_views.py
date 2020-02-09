@@ -4,7 +4,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
 
 from app import db, admin
-from app.models import User
+from app.models.auth import User
 from app.models.books import Book, Author, Category, Identifier, Link
 
 
