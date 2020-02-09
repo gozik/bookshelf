@@ -57,6 +57,6 @@ def create_app(config_class=config[config_name]):
     return app
 
 
-from app import models
+from app.models import auth, books, hardcopy, history
 from app.main import routes, admin_views
 
