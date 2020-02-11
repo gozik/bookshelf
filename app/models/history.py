@@ -16,5 +16,5 @@ class History(db.Model):
     user_to_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user_to = db.relationship('User', foreign_keys=[user_to_id])
 
-    hardcopy_id = db.Column(db.Integer, db.ForeignKey('hardcopies.id'))
-    hardcopy = db.relationship('Hardcopy')
+    item_id = db.Column(db.Integer, db.ForeignKey('items.id'))
+    item = db.relationship('Item')
