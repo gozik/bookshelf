@@ -7,7 +7,7 @@ from werkzeug.urls import url_parse
 
 from app import db
 from app.models.auth import User
-from app.main.forms import LoginForm, RegistrationForm
+from app.main.forms import LoginForm, RegistrationForm, NewBookForm
 
 from app.main import bp
 
@@ -15,7 +15,8 @@ from app.main import bp
 @bp.route('/index')
 @bp.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    form = NewBookForm()
+    return render_template('index.html', form=form)
     
 
 @bp.route('/login', methods=['GET', 'POST'])

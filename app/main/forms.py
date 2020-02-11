@@ -28,3 +28,9 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+
+class NewBookForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    subtitle = StringField('Subtitle')
+    submit = SubmitField('Add new book')
