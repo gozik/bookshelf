@@ -6,6 +6,8 @@ from flask_login import current_user
 from app import db, admin
 from app.models.auth import User
 from app.models.books import Book, Author, Category, Identifier, Link
+from app.models.history import History
+from app.models.item import Item
 
 
 class AdminModelView(ModelView):
@@ -36,4 +38,6 @@ admin.add_view(AdminModelView(Author, db.session, category='Books'))
 admin.add_view(AdminModelView(Category, db.session, category='Books'))
 admin.add_view(AdminModelView(Identifier, db.session, category='Books'))
 admin.add_view(AdminModelView(Link, db.session, category='Books'))
+admin.add_view(AdminModelView(Item, db.session, category='BookItems'))
+admin.add_view(AdminModelView(History, db.session, category='BookItems'))
 admin.add_link(MenuLink(name='Exit Admin', url='/'))
