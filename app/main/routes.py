@@ -16,12 +16,18 @@ from app.main import bp
 @bp.route('/index')
 @bp.route('/', methods=['GET', 'POST'])
 def index():
+    return render_template('index.html')
+
+
+@bp.route('/add_book', methods=['GET', 'POST'])
+@login_required
+def add_book():
     form = NewBookForm()
     if form.validate_on_submit():
         ui = UserInterface(current_user)
         ui.add_book(title=form.data['title'])
         return redirect('/')
-    return render_template('index.html', form=form)
+    return render_template('quickform.html', form=form)
     
 
 @bp.route('/login', methods=['GET', 'POST'])

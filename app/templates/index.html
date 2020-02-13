@@ -7,7 +7,8 @@
 	<p>Пользователь: <b>{{ current_user.username }}</b></p>
     <p>Добро пожаловать на книжную полку.</p>
 </div>
-{{ wtf.quick_form(form) }}
+<a class="btn btn-primary btn-block" href="{{ url_for('main.add_book') }}">Add book</a>
+
 {% else %}
 <div>
 	<h1>Пожалуйста, залогиньтесь!</h1>

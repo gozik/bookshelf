@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired, Email, EqualTo
 
 from app.models.auth import User
 
+
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
