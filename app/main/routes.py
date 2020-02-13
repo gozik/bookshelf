@@ -8,6 +8,7 @@ from werkzeug.urls import url_parse
 from app import db
 from app.models.auth import User
 from app.main.forms import LoginForm, RegistrationForm, NewBookForm
+from app.main.controller import UserInterface
 
 from app.main import bp
 
@@ -16,6 +17,10 @@ from app.main import bp
 @bp.route('/', methods=['GET', 'POST'])
 def index():
     form = NewBookForm()
+    if form.validate_on_submit():
+        ui = UserInterface(current_user)
+        ui.add_book(title=form.data['title'])
+        return redirect('/')
     return render_template('index.html', form=form)
     
 

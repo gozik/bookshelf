@@ -1,4 +1,6 @@
 from app import db
+from app.models.books import Book
+from app.models.item import Item
 from app.models.history import History
 
 
@@ -8,9 +10,14 @@ class UserInterface:
     def __init__(self, user):
         self.user = user
 
-    def add_book(self, book, add_item=False):
+    def add_book(self, title, add_item=False):
         """ Add book (as description) to database """
-        pass
+        b = Book(title=title)
+        if add_item:
+            i = Item(book=b, owner=self.user)
+            db.session.add(i)
+        db.session.add(b)
+        db.session.commit()
 
     def new_item(self, item):
         """ Add item to your collection """
@@ -32,7 +39,7 @@ class UserInterface:
         db.session.commit()
 
     def return_item(self, item):
-        """ Return hardcopy to previous controller """
+        """ Return item to previous controller """
         # Возврат обычно производится на полку (откуда книга была взята),
         # таким образом некорректно говорить, что возврат будет обязательно владельцу
         # Дополнительно необходимо учесть вложенные передачи (неограниченной глубины):
@@ -53,7 +60,7 @@ class UserInterface:
 
     def give_item(self, item, user_to):
         if item.controller != self.user:
-            # you have to controll item to be able to give it
+            # you have to control item to be able to give it
             return 1
 
         user_from = self.user
