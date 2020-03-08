@@ -43,13 +43,16 @@ class UserInterface:
         # таким образом некорректно говорить, что возврат будет обязательно владельцу
         # Дополнительно необходимо учесть вложенные передачи (неограниченной глубины):
         # A -> B -> C -> B (тут интерфейс должен знать, кому необходимо вернуть книгу) -> A
-        last_user_from = (History.query
-                            .filter_by(item=item, user_to=self.user,
-                                       command='take_item')
-                            .order_by(History.id.desc())
-                            .first()
-                     ).user_from
-        # add give item as option for command
+        last = (History.query
+                .filter_by(item=item, user_to=self.user)
+                .filter(History.command.in_(['take_item', 'give_item']))
+                .order_by(History.id.desc())
+                .first()
+                )
+
+        if not last:
+            return 1 # no previous controller
+        last_user_from = last.user_from
         item.controller = last_user_from
         history = History(command='return_item', item=item,
                           user_from=self.user, user_to=last_user_from)
