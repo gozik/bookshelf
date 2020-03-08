@@ -15,7 +15,7 @@ from config import config
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
-login.login_view = 'login'
+login.login_view = 'main.login'
 bootstrap = Bootstrap()
 admin = Admin(name='ver_flask', template_mode='bootstrap3')
 
