@@ -2,7 +2,6 @@
 Web application for book sharing
 
 # To run application
-<<<<<<< HEAD
 - Make virtualenv: virtualenv env
 - Activate it: . env/scripts/activate
 - Install requirements: pip install -r requirements.txt

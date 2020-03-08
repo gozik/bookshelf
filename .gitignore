@@ -127,5 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
 data-dev.sqlite
-migrations/
+.idea
+data.sqlite
+logs

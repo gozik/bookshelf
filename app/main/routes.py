@@ -1,18 +1,39 @@
-from flask import flash, render_template, request, redirect, url_for
+import os
+
+from flask import flash, render_template, redirect, url_for
+from flask import send_from_directory, request, current_app
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
 from app import db
-from app.models import User
-from app.main.forms import LoginForm, RegistrationForm
+from app.models.auth import User
+from app.main.forms import LoginForm, RegistrationForm, NewBookForm
+from app.main.controller import UserInterface
 
 from app.main import bp
 
 
 @bp.route('/index')
 @bp.route('/', methods=['GET', 'POST'])
+@login_required
 def index():
-    return render_template('index.html')
+    own_items = current_user.own_items
+    controlled_items = current_user.controlled_items
+    return render_template('index.html',
+                           own_items=own_items, controlled_items=controlled_items)
+
+
+@bp.route('/add_book', methods=['GET', 'POST'])
+@login_required
+def add_book():
+    form = NewBookForm()
+    if form.validate_on_submit():
+        ui = UserInterface(current_user)
+        ui.add_book(title=form.data['title'],
+                    subtitle=form.data['subtitle'],
+                    add_item=form.data['add_item'])
+        return redirect('/')
+    return render_template('quickform.html', form=form)
     
 
 @bp.route('/login', methods=['GET', 'POST'])
