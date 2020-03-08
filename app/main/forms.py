@@ -34,4 +34,5 @@ class RegistrationForm(FlaskForm):
 class NewBookForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     subtitle = StringField('Subtitle')
+    add_item = BooleanField('Add own item')
     submit = SubmitField('Add new book')

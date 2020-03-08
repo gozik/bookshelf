@@ -49,6 +49,8 @@ class Book(db.Model):
                                   secondary='book_image_link')
     language = db.Column(db.String(32))
 
+    def __str__(self):
+        return self.title
 
 class Author(db.Model):
     __tablename__ = 'authors'

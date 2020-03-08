@@ -13,11 +13,10 @@ class UserInterface:
     def add_book(self, title, subtitle, add_item=False):
         """ Add book (as description) to database """
         b = Book(title=title, subtitle=subtitle)
-        if add_item:
-            i = Item(book=b, owner=self.user)
-            db.session.add(i)
         db.session.add(b)
         db.session.commit()
+        if add_item:
+            self.new_item(Item(book=b))
 
     def new_item(self, item):
         """ Add item to your collection """

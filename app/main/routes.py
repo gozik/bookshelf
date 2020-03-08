@@ -26,7 +26,8 @@ def add_book():
     if form.validate_on_submit():
         ui = UserInterface(current_user)
         ui.add_book(title=form.data['title'],
-                    subtitle=form.data['subtitle'])
+                    subtitle=form.data['subtitle'],
+                    add_item=form.data['add_item'])
         return redirect('/')
     return render_template('quickform.html', form=form)
     
