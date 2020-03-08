@@ -15,8 +15,12 @@ from app.main import bp
 
 @bp.route('/index')
 @bp.route('/', methods=['GET', 'POST'])
+@login_required
 def index():
-    return render_template('index.html')
+    own_items = current_user.own_items
+    controlled_items = current_user.controlled_items
+    return render_template('index.html',
+                           own_items=own_items, controlled_items=controlled_items)
 
 
 @bp.route('/add_book', methods=['GET', 'POST'])

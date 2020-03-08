@@ -7,6 +7,19 @@
 	<p>Пользователь: <b>{{ current_user.username }}</b></p>
     <p>Добро пожаловать на книжную полку.</p>
 </div>
+<ul class="list-group">
+	<li class="list-group-item list-group-item-info">Мои книги</li>
+{% for item in own_items %}
+	<li class="list-group-item">{{ item.book.title }}</li>
+{% endfor %}
+</ul>
+<ul class="list-group">
+	<li class="list-group-item list-group-item-info">Книги у меня</li>
+{% for item in controlled_items %}
+	<li class="list-group-item">{{ item.book.title }}</li>
+{% endfor %}
+</ul>
+
 <a class="btn btn-primary btn-block" href="{{ url_for('main.add_book') }}">Add book</a>
 
 {% else %}
