@@ -10,9 +10,9 @@ class UserInterface:
     def __init__(self, user):
         self.user = user
 
-    def add_book(self, title, add_item=False):
+    def add_book(self, title, subtitle, add_item=False):
         """ Add book (as description) to database """
-        b = Book(title=title)
+        b = Book(title=title, subtitle=subtitle)
         if add_item:
             i = Item(book=b, owner=self.user)
             db.session.add(i)
