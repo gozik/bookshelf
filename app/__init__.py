@@ -1,4 +1,7 @@
 import os
+import logging
+from logging.handlers import RotatingFileHandler
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -7,7 +10,7 @@ from flask_login import LoginManager
 from flask_admin import Admin
 
 from config import config
-import logging
+
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -54,6 +57,6 @@ def create_app(config_class=config[config_name]):
     return app
 
 
-from app import models
+from app.models import auth, books, item, history
 from app.main import routes, admin_views
 

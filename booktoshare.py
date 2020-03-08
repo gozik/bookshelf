@@ -3,7 +3,7 @@ import click
 from flask import current_app
 
 from app import db, create_app
-from app.models import User, Role
+from app.models.auth import User, Role
 from app.models.books import Book
 
 

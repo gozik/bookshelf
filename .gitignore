@@ -131,3 +131,5 @@ dmypy.json
 
 data-dev.sqlite
 .idea
+data.sqlite
+logs
