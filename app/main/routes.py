@@ -1,5 +1,7 @@
 import os
 
+from requests import get
+
 from flask import flash, render_template, redirect, url_for
 from flask import send_from_directory, request, current_app
 from flask_login import current_user, login_user, logout_user, login_required
@@ -53,6 +55,16 @@ def login():
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
+
+@bp.route('/googleapi', methods=['GET', 'POST'])
+@login_required
+def googleapi():
+    volume_api = 'https://www.googleapis.com/books/v1/volumes'
+    api_key = current_app.config["API_KEY_BOOKS"]
+    api_args = f'q=flowers&projection=lite&key={api_key}' 
+    request_str = volume_api + '?' + api_args
+    r = get(request_str)
+    return r.text, 200
 
 @bp.route('/logout')
 @login_required
