@@ -28,6 +28,7 @@
 				<li><a href="{{ url_for('main.register') }}">Новый пользователь</a></li>
 				{% else %}
 				<li><a href="/">Главная</a></li>
+                <li><a href="/search">Поиск</a></li>
 				{% if current_user.role.name == 'Admin' %}<li><a href="{{ url_for('admin.index') }}">Управление</a></li>
                 {% endif%}
 				<li><a href="{{ url_for('main.logout') }}">Выйти</a></li>

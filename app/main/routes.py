@@ -56,17 +56,17 @@ def login():
     return render_template('login.html', title='Sign In', form=form)
 
 
-@bp.route('/googleapi', methods=['GET', 'POST'])
+@bp.route('/search', methods=['GET', 'POST'])
 @login_required
-def googleapi():
+def search():
     form = SearchForm()
     if form.validate_on_submit():
         volume_api_url = 'https://www.googleapis.com/books/v1/volumes'
         api_key = current_app.config["API_KEY_BOOKS"]
-        api_args = f'q={form.data["search"]}&projection=lite&key={api_key}'
+        api_args = f'q={form.data["search"]}&key={api_key}'
         request_str = volume_api_url + '?' + api_args
         r = get(request_str)
-        return r.json(), 200
+        return render_template('book_search.html', form=form, books=r.json()['items'])
     return render_template('quickform.html', form=form)
 
 
