@@ -5,24 +5,38 @@
 <div>
 	<p>Пользователь: <b>{{ current_user.username }}</b></p>
 </div>
+<div class="container">
+	<details>
+		<summary>Search hint</summary>
+		<p>Search for volumes that contain this text string. There are special keywords you can specify in the search terms to search in particular fields, such as:</p>
+		<ul>
+			<li>intitle: Returns results where the text following this keyword is found in the title.</li>
+			<li>inauthor: Returns results where the text following this keyword is found in the author.</li>
+			<li>inpublisher: Returns results where the text following this keyword is found in the publisher.</li>
+			<li>subject: Returns results where the text following this keyword is listed in the category list of the volume.</li>
+			<li>isbn: Returns results where the text following this keyword is the ISBN number. Example: "isbn:9785496020237"</li>
+			<li>lccn: Returns results where the text following this keyword is the Library of Congress Control Number.</li>
+			<li>oclc: Returns results where the text following this keyword is the Online Computer Library Center number.</li>
+		</ul>
+</details>
 <div class="col-12 col-md-9">
 {{ wtf.quick_form(form, form_type='horizontal') }}
 </div>
 <div class="col-12 col-md-3">
 <img src="/static/poweredby.png"/>
+<br>
+</div>
 </div>
 
-
 {% for book in books %}
-<div>
+<div class="col-9 col-md-3">
 	<h3>{{ book.volumeInfo.title }}</h3>
 	{% if 'imageLinks' in book.volumeInfo %}
 	<img class="aligning card z-depth-5" src="{{ book.volumeInfo.imageLinks.thumbnail }}"><br>
 	{% else %}
 	<img class="aligning card z-depth-5" src="/static/no_cover_thumb.gif"><br>
 	{% endif %}
-	<a href="{{ book.volumeInfo.infoLink }}">
-	<button class="btn red aligning">Read More</button></a>
+	<a href="{{ url_for('main.google_volume', google_id=book.id) }}"><button>Volume</button></a>
 </div>
 {% endfor %}
 {% endblock %}

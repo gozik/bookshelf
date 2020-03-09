@@ -66,8 +66,18 @@ def search():
         api_args = f'q={form.data["search"]}&key={api_key}'
         request_str = volume_api_url + '?' + api_args
         r = get(request_str)
-        return render_template('book_search.html', form=form, books=r.json()['items'])
+        books = r.json().get('items', [])
+        return render_template('book_search.html', form=form, books=books)
     return render_template('book_search.html', form=form)
+
+
+@bp.route('/google_volume/<google_id>')
+@login_required
+def google_volume(google_id):
+    api_key = current_app.config["API_KEY_BOOKS"]
+    request_str = f'https://www.googleapis.com/books/v1/volumes/{google_id}?key={api_key}'
+    r = get(request_str)
+    return render_template('volume.html', volume=r.json())
 
 
 @bp.route('/logout')

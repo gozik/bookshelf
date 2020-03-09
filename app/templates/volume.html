@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block page_content %}
+<div>
+	<p>Пользователь: <b>{{ current_user.username }}</b></p>
+</div>
+<img class="aligning card z-depth-5" src="{{ volume.volumeInfo.imageLinks.thumbnail }}"><br>
+<ul class="list-group">
+	<li class="list-group-item list-group-item-info">{{ volume.volumeInfo.title }}</li>
+    {% if volume.volumeInfo.subtitle %}<li class="list-group-item">Subtitle: {{ volume.volumeInfo.subtitle }}</li>
+    {% endif %}
+    <li class="list-group-item">Authors: {{ ', '.join(volume.volumeInfo.authors) }}</li>
+    {% if volume.volumeInfo.publisher %}<li class="list-group-item">Publisher: {{ volume.volumeInfo.publisher }}</li>
+    {% endif %}
+    {% if volume.volumeInfo.publishedDate %}<li class="list-group-item">Published Date: {{ volume.volumeInfo.publishedDate }}</li>
+    {% endif %}
+    {% if volume.volumeInfo.page_count %}<li class="list-group-item">Page count: {{ volume.volumeInfo.page_count }}</li>
+    {% endif %}
+    {% if volume.volumeInfo.language %}<li class="list-group-item">Language: {{ volume.volumeInfo.language }}</li>
+    {% endif %}
+</ul>
+<p>{{ volume.volumeInfo.description }}</p>
+<a href="{{ volume.volumeInfo.infoLink }}"><button class="btn red aligning">Read More</button></a>
+{% endblock %}
