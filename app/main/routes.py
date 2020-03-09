@@ -9,7 +9,7 @@ from werkzeug.urls import url_parse
 
 from app import db
 from app.models.auth import User
-from app.main.forms import LoginForm, RegistrationForm, NewBookForm
+from app.main.forms import LoginForm, RegistrationForm, NewBookForm, SearchForm
 from app.main.controller import UserInterface
 
 from app.main import bp
@@ -59,12 +59,16 @@ def login():
 @bp.route('/googleapi', methods=['GET', 'POST'])
 @login_required
 def googleapi():
-    volume_api = 'https://www.googleapis.com/books/v1/volumes'
-    api_key = current_app.config["API_KEY_BOOKS"]
-    api_args = f'q=flowers&projection=lite&key={api_key}' 
-    request_str = volume_api + '?' + api_args
-    r = get(request_str)
-    return r.text, 200
+    form = SearchForm()
+    if form.validate_on_submit():
+        volume_api_url = 'https://www.googleapis.com/books/v1/volumes'
+        api_key = current_app.config["API_KEY_BOOKS"]
+        api_args = f'q={form.data["search"]}&projection=lite&key={api_key}'
+        request_str = volume_api_url + '?' + api_args
+        r = get(request_str)
+        return r.json(), 200
+    return render_template('quickform.html', form=form)
+
 
 @bp.route('/logout')
 @login_required

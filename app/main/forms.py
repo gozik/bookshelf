@@ -36,3 +36,8 @@ class NewBookForm(FlaskForm):
     subtitle = StringField('Subtitle')
     add_item = BooleanField('Add own item')
     submit = SubmitField('Add new book')
+
+
+class SearchForm(FlaskForm):
+    search = StringField('Search', validators=[DataRequired()])
+    submit = SubmitField('Search book')

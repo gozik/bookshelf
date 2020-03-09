@@ -11,7 +11,6 @@ from flask_admin import Admin
 
 from config import config
 
-
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
@@ -22,6 +21,7 @@ admin = Admin(name='ver_flask', template_mode='bootstrap3')
 env_name = os.getenv('FLASK_ENV', 'default')
 config_name = os.getenv('FLASK_CONFIG', env_name)
 
+
 def create_app(config_class=config[config_name]):
     app = Flask(__name__)
     app.config.from_object(config_class)
@@ -31,7 +31,7 @@ def create_app(config_class=config[config_name]):
     login.init_app(app)
     bootstrap.init_app(app)
     admin.init_app(app)
-   
+
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
 
@@ -59,4 +59,3 @@ def create_app(config_class=config[config_name]):
 
 from app.models import auth, books, item, history
 from app.main import routes, admin_views
-
