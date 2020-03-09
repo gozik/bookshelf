@@ -40,4 +40,4 @@ class NewBookForm(FlaskForm):
 
 class SearchForm(FlaskForm):
     search = StringField('Search', validators=[DataRequired()])
-    submit = SubmitField('Search book')
+    submit = SubmitField('Search books')

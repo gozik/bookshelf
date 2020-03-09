@@ -5,17 +5,24 @@
 <div>
 	<p>Пользователь: <b>{{ current_user.username }}</b></p>
 </div>
-{{ wtf.quick_form(form) }}
+<div class="col-12 col-md-9">
+{{ wtf.quick_form(form, form_type='horizontal') }}
+</div>
+<div class="col-12 col-md-3">
+<img src="/static/poweredby.png"/>
+</div>
+
+
 {% for book in books %}
 <div>
-	<h2>{{ book.volumeInfo.title }}</h2>
+	<h3>{{ book.volumeInfo.title }}</h3>
 	{% if 'imageLinks' in book.volumeInfo %}
-	<img class="aligning card z-depth-5" id="dynamic" src="{{ book.volumeInfo.imageLinks.thumbnail }}"><br>
+	<img class="aligning card z-depth-5" src="{{ book.volumeInfo.imageLinks.thumbnail }}"><br>
 	{% else %}
-	<img class="aligning card z-depth-5" id="dynamic" src="/static/no_cover_thumb.gif"><br>
+	<img class="aligning card z-depth-5" src="/static/no_cover_thumb.gif"><br>
 	{% endif %}
 	<a href="{{ book.volumeInfo.infoLink }}">
-	<button id="imagebutton" class="btn red aligning">Read More</button></a>
+	<button class="btn red aligning">Read More</button></a>
 </div>
 {% endfor %}
 {% endblock %}

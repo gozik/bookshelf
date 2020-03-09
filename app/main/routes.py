@@ -67,7 +67,7 @@ def search():
         request_str = volume_api_url + '?' + api_args
         r = get(request_str)
         return render_template('book_search.html', form=form, books=r.json()['items'])
-    return render_template('quickform.html', form=form)
+    return render_template('book_search.html', form=form)
 
 
 @bp.route('/logout')
