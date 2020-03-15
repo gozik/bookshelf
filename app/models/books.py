@@ -25,6 +25,8 @@ class Book(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
+    google_id = db.Column(db.String(16))
+
     title = db.Column(db.String(240))
     subtitle = db.Column(db.String(240))
 

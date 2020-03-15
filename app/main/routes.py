@@ -15,6 +15,22 @@ from app.main.controller import UserInterface
 from app.main import bp
 
 
+class GoogleApi:
+    def __init__(self):
+        self.api_key = current_app.config["API_KEY_BOOKS"]
+
+    def request_volume(self, volume_id):
+        request_str = f'https://www.googleapis.com/books/v1/volumes/{volume_id}?key={self.api_key}'
+        r = get(request_str)
+        return r
+
+    def search(self, query):
+        volume_api_url = 'https://www.googleapis.com/books/v1/volumes'
+        api_args = f'q={query}&key={self.api_key}'
+        request_str = volume_api_url + '?' + api_args
+        return get(request_str)
+
+
 @bp.route('/index')
 @bp.route('/', methods=['GET', 'POST'])
 @login_required
@@ -60,12 +76,9 @@ def login():
 @login_required
 def search():
     form = SearchForm()
+    google_api = GoogleApi()
     if form.validate_on_submit():
-        volume_api_url = 'https://www.googleapis.com/books/v1/volumes'
-        api_key = current_app.config["API_KEY_BOOKS"]
-        api_args = f'q={form.data["search"]}&key={api_key}'
-        request_str = volume_api_url + '?' + api_args
-        r = get(request_str)
+        r = google_api.search(form.data["search"])
         books = r.json().get('items', [])
         return render_template('book_search.html', form=form, books=books)
     return render_template('book_search.html', form=form)
@@ -74,9 +87,8 @@ def search():
 @bp.route('/google_volume/<google_id>')
 @login_required
 def google_volume(google_id):
-    api_key = current_app.config["API_KEY_BOOKS"]
-    request_str = f'https://www.googleapis.com/books/v1/volumes/{google_id}?key={api_key}'
-    r = get(request_str)
+    google_api = GoogleApi()
+    r = google_api.request_volume(google_id)
     return render_template('volume.html', volume=r.json())
 
 
