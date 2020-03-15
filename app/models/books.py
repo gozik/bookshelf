@@ -54,6 +54,7 @@ class Book(db.Model):
     def __str__(self):
         return self.title
 
+
 class Author(db.Model):
     __tablename__ = 'authors'
 
