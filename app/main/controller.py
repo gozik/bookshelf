@@ -15,6 +15,7 @@ class UserInterface:
         b = Book(title=title, subtitle=subtitle)
         db.session.add(b)
         db.session.commit()
+
         if add_item:
             self.new_item(Item(book=b))
 
